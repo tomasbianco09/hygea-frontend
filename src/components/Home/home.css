@@ -1,80 +1,143 @@
 .home-container {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 2rem;
+  background-color: #f8fafc; /* Gris claro de fondo súper limpio */
+  padding: 3rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 .home-header {
   text-align: center;
-  color: #ffffff;
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
+  max-width: 800px;
+}
+
+.header-meta {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #64748b;
+  margin-bottom: 0.5rem;
 }
 
 .home-header h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  margin: 0 0 1rem 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #1e293b; /* Azul oscuro corporativo */
+  margin: 0 0 0.5rem 0;
 }
 
-.home-header p {
-  font-size: 1.2rem;
+.home-header .subtitle {
+  font-size: 1.15rem;
+  color: #475569;
   margin: 0;
-  opacity: 0.9;
+  font-weight: 400;
 }
 
-.home-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
+/* Sección de Bienvenida Principal */
+.hero-section {
+  background: white;
+  max-width: 1000px;
   width: 100%;
-}
-
-.home-card {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 10px;
   padding: 2rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.03);
+  margin-bottom: 2.5rem;
+  border-left: 5px solid #0ea5e9; /* Detalle azul en el borde */
 }
 
-.home-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+.hero-content h2 {
+  margin: 0 0 0.8rem 0;
+  color: #0f172a;
+  font-size: 1.4rem;
+  font-weight: 700;
 }
 
-.home-card h2 {
-  color: #667eea;
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
-}
-
-.home-card p {
-  color: #666;
+.hero-content p {
+  color: #475569;
   line-height: 1.6;
   margin: 0;
-}
-
-.home-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  padding: 0.8rem 2rem;
-  border-radius: 5px;
   font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: opacity 0.3s ease;
-  margin-top: 1rem;
 }
 
-.home-button:hover {
-  opacity: 0.9;
+/* Grilla de Módulos */
+.features-section {
+  max-width: 1000px;
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1.8rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid #e2e8f0;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Colores temáticos para los íconos de los módulos */
+.font-azul { color: #3498db; }
+.font-verde { color: #2ecc71; }
+.font-naranja { color: #e67e22; }
+.font-violeta { color: #9b59b6; }
+
+.feature-card h3 {
+  color: #1e293b;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 0.6rem 0;
+}
+
+.feature-card p {
+  color: #64748b;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Footer de Estado de Conexión */
+.home-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  background-color: #2ecc71; /* Punto verde de activo */
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 8px #2ecc71;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.5; }
 }

@@ -11,7 +11,7 @@ const Reportes = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // CORREGIDO: Cambiamos 'categories' por 'categorias' para hermanar con app.py
+    // Sincronización en paralelo con los endpoints en español de app.py
     Promise.all([
       fetch('https://hygea-backend-production.up.railway.app/api/reportes/mas-vendidos').then(res => {
         if (!res.ok) throw new Error();
@@ -41,7 +41,7 @@ const Reportes = () => {
     <div className="reportes-wrapper">
       <div className="reportes-header">
         <h2 className="reportes-titulo">Reportes y Estadísticas de Auditoría</h2>
-        <button className="btn-exportar">⬇️ Exportar Métricas</button>
+        {/* ❌ El botón de exportar métricas fue removido exitosamente desde aquí */}
       </div>
 
       {error && (
@@ -61,7 +61,6 @@ const Reportes = () => {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', padding: '10px 0' }}>
                 {datosCategorias.map((cat, index) => {
                   const porcentaje = (cat.total_vendido / maxVendido) * 100;
-                  // Asigna un color de la paleta rotativa según el índice
                   const colorBarra = PALETA_COLORES[index % PALETA_COLORES.length];
                   
                   return (

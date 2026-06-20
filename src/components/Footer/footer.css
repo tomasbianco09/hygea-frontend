@@ -1,3 +1,82 @@
-.home-footer {
+.main-footer {
+  width: 100%;
+  background-color: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  padding: 1rem 2rem; /* Bajamos un poquito el padding vertical */
+  margin-top: auto;   /* Esto sigue empujando al fondo perfectamente */
+  display: flex;
+  justify-content: center;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.footer-content {
+  max-width: 1000px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-left, .footer-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-brand {
+  font-weight: 700;
+  color: #1e293b;
+  font-size: 0.9rem;
+}
+
+.footer-separator {
+  color: #cbd5e1;
+  font-size: 0.9rem;
+}
+
+.footer-copy {
+  color: #64748b;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.footer-tag {
+  background-color: #f1f5f9;
+  color: #475569;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.footer-system {
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.footer-status-dot {
+  width: 7px;
+  height: 7px;
+  background-color: #2ecc71;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Responsivo para pantallas chicas (celulares) */
+@media (max-width: 600px) {
+  .footer-content {
+    flex-direction: column;
     text-align: center;
+  }
+  .footer-left, .footer-right {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .footer-separator {
+    display: none;
+  }
 }

@@ -7,6 +7,11 @@ const SideNav = () => {
     <aside className="sidenav">
       <ul className="sidenav-menu">
         <li>
+          <NavLink to="/" className={({ isActive }) => isActive ? 'sidenav-link active' : 'sidenav-link'}>
+            📦 Inicio
+          </NavLink>
+        </li>
+        <li>
           <NavLink to="/inventario" className={({ isActive }) => isActive ? 'sidenav-link active' : 'sidenav-link'}>
             📦 Inventario
           </NavLink>

@@ -1,0 +1,155 @@
+.ventas-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ventas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ventas-titulo {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.btn-nueva-venta {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #22c55e;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Cards */
+.ventas-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.vcard {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vcard-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vcard-label {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.vcard-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.vcard-trend {
+  font-size: 13px;
+}
+
+.positivo { color: #22c55e; }
+.negativo { color: #ef4444; }
+.neutro   { color: #64748b; }
+
+.vcard-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.vcard-icon.azul   { background-color: #dbeafe; }
+.vcard-icon.verde  { background-color: #dcfce7; }
+.vcard-icon.violeta { background-color: #f3e8ff; }
+
+/* Tabla */
+.page-card {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.ultimas-titulo {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+}
+
+.ventas-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.ventas-tabla th {
+  text-align: left;
+  padding: 10px 12px;
+  background-color: #f8fafc;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.ventas-tabla td {
+  padding: 12px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #374151;
+}
+
+.ventas-tabla tr:hover {
+  background-color: #f8fafc;
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge.completado {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+
+.badge.pendiente {
+  background-color: #e0e7ff;
+  color: #4338ca;
+}
+
+.ventas-acciones {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-ver, .btn-imprimir {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-ver { color: #3b82f6; }
+.btn-imprimir { color: #64748b; }

@@ -1,0 +1,11 @@
+.layout {
+  display: flex;
+}
+
+.main-content {
+  flex: 1;
+  background-color: #f2f3f3;
+  min-height: calc(100vh - 56px);
+  padding: 25px;        /* ← esto da el espacio interno */
+  box-sizing: border-box;
+}

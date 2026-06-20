@@ -1,0 +1,39 @@
+.sidenav {
+  width: 210px;
+  min-height: calc(100vh - 56px);
+  background-color: white;
+  padding: 16px 0;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  
+}
+
+.sidenav-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidenav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  color: black;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.2s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sidenav-link:hover {
+  background-color: #cfddee;
+}
+
+.sidenav-link.active {
+  background-color: #1a56db;
+  color: white;
+}

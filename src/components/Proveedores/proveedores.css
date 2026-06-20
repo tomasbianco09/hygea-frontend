@@ -1,0 +1,103 @@
+.page-card {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.prov-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.prov-titulo {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.btn-nuevo {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #22c55e;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.prov-info {
+  background-color: #eff6ff;
+  border-left: 4px solid #3b82f6;
+  padding: 10px 16px;
+  color: #3b82f6;
+  font-size: 14px;
+  margin-bottom: 16px;
+  border-radius: 4px;
+}
+
+.prov-buscar {
+  width: 100%;
+  padding: 10px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.prov-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.prov-tabla th {
+  text-align: left;
+  padding: 10px 12px;
+  background-color: #f8fafc;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.prov-tabla td {
+  padding: 12px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #374151;
+}
+
+.prov-tabla tr:hover {
+  background-color: #f8fafc;
+}
+
+.acciones {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-editar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #3b82f6;
+}
+
+.btn-eliminar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #ef4444;
+}
+
+.prov-footer {
+  margin-top: 16px;
+  font-size: 13px;
+  color: #64748b;
+}

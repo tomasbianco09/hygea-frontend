@@ -1,0 +1,167 @@
+.recetas-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.recetas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recetas-titulo {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.btn-nueva-receta {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #22c55e;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.recetas-info {
+  background-color: #eff6ff;
+  border-left: 4px solid #3b82f6;
+  padding: 10px 16px;
+  color: #3b82f6;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.recetas-filtros {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.recetas-buscar {
+  flex: 1;
+  padding: 10px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.recetas-select {
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  background: white;
+  cursor: pointer;
+}
+
+/* Grid de cards */
+.recetas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.receta-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.receta-card-header {
+  background-color: #3b82f6;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.receta-id {
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.receta-medico {
+  color: #bfdbfe;
+  font-size: 13px;
+}
+
+.receta-card-body {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.receta-paciente,
+.receta-fecha {
+  margin: 0;
+  font-size: 14px;
+  color: #374151;
+}
+
+.badge-psico {
+  display: inline-block;
+  background-color: #f3e8ff;
+  color: #9333ea;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 6px 0;
+  width: fit-content;
+}
+
+.receta-med-titulo {
+  margin: 8px 0 4px;
+  font-size: 14px;
+  color: #1e293b;
+}
+
+.receta-med-lista {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 14px;
+  color: #374151;
+}
+
+.receta-med-lista li {
+  margin-bottom: 4px;
+}
+
+.receta-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.btn-ver {
+  background: none;
+  border: none;
+  color: #3b82f6;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn-descargar {
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  font-size: 14px;
+}

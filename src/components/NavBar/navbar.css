@@ -1,0 +1,44 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1a56db;
+  padding: 0 24px;
+  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-icon {
+  font-size: 22px;
+}
+
+.navbar-title {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navbar-sucursal {
+  color: white;
+  font-size: 14px;
+}
+
+.navbar-bell {
+  font-size: 20px;
+  cursor: pointer;
+  position: relative;
+}

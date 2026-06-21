@@ -65,27 +65,28 @@
   border-bottom: 1px solid #e2e8f0;
 }
 
+/* Forzar que el título de la columna acciones también maneje simetría central */
+.prov-tabla th:last-child {
+  text-align: center;
+}
+
 .prov-tabla td {
   padding: 12px;
   border-bottom: 1px solid #f1f5f9;
   color: #374151;
+  vertical-align: middle; /* Centrado vertical en la celda nativa */
 }
 
 .prov-tabla tr:hover {
   background-color: #f8fafc;
 }
 
+/* Solución al descentrado: Flexbox alineando al centro del espacio asignado */
 .acciones {
   display: flex;
-  gap: 8px;
-}
-
-.btn-editar {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  color: #3b82f6;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .btn-eliminar {
@@ -94,6 +95,15 @@
   cursor: pointer;
   font-size: 16px;
   color: #ef4444;
+  padding: 4px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.1s ease;
+}
+
+.btn-eliminar:hover {
+  transform: scale(1.15); /* Efecto sutil al pasar el mouse */
 }
 
 .prov-footer {

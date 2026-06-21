@@ -47,7 +47,7 @@ const Inventario = () => {
 
     const loteData = {
       codigo_lote: codigoLote,
-      medicamento_id: parseInt(medSeleccionado), // ID limpio directo del <select>
+      medicamento_id: parseInt(medSeleccionado),
       fecha_vencimiento: fechaVencimiento,
       cantidad_stock: parseInt(cantidadStock)
     };
@@ -62,7 +62,6 @@ const Inventario = () => {
         return res.json();
       })
       .then(() => {
-        // Si sale bien: refrescamos stock en vivo, cerramos modal y limpiamos campos
         cargarInventario();
         setShowModal(false);
         setCodigoLote('');
@@ -83,7 +82,6 @@ const Inventario = () => {
       <div className="inv-header">
         <h2 className="inv-titulo">Control de Stock (Base de Datos en Vivo)</h2>
         <div className="inv-acciones">
-          {/* Al hacer clic abrimos el Modal Regulado */}
           <button className="btn-nuevo" onClick={() => setShowModal(true)}>+ Nuevo Lote</button>
         </div>
       </div>
@@ -113,9 +111,8 @@ const Inventario = () => {
               <th>Laboratorio</th>
               <th>Receta</th>
               <th>Precio Venta</th>
-              <th>Stock Actual</th>
-              <th>Estado</th>
-              <th>Acción</th>
+              <th className="txt-centro">Stock Actual</th>
+              <th className="txt-centro">Estado</th>
             </tr>
           </thead>
           <tbody>
@@ -126,15 +123,14 @@ const Inventario = () => {
                 <td>{m.laboratorio}</td>
                 <td>{m.requiere_receta ? 'OBLIGATORIA' : 'Venta Libre'}</td>
                 <td>${parseFloat(m.precio_venta).toFixed(2)}</td>
-                <td style={{ color: m.stock_actual < 10 ? '#e74c3c' : 'inherit', fontWeight: m.stock_actual < 10 ? 'bold' : 'normal' }}>
+                <td className="txt-centro" style={{ color: m.stock_actual < 10 ? '#e74c3c' : 'inherit', fontWeight: m.stock_actual < 10 ? 'bold' : 'normal' }}>
                   {m.stock_actual} u.
                 </td>
-                <td>
+                <td className="txt-centro">
                   <span className={estadoClase(m.stock_actual < 10 ? 'REPONER' : 'OK')}>
                     {m.stock_actual < 10 ? 'CRÍTICO' : 'OK'}
                   </span>
                 </td>
-                
               </tr>
             ))}
           </tbody>
@@ -156,7 +152,6 @@ const Inventario = () => {
                 <input type="text" required placeholder="LOT-XXX-000" value={codigoLote} onChange={e => setCodigoLote(e.target.value)} style={{ padding: '8px', marginTop: '5px', borderRadius: '4px', border: '1px solid #ccc' }} />
               </label>
 
-              {/* FILTRO SELECTIVO DINÁMICO CONTRA ERRORES  */}
               <label style={{ display: 'flex', flexDirection: 'column', fontSize: '14px', fontWeight: 'bold' }}>
                 Seleccionar Medicamento (Catálogo Oficial):
                 <select required value={medSeleccionado} onChange={e => setMedSeleccionado(e.target.value)} style={{ padding: '8px', marginTop: '5px', borderRadius: '4px', border: '1px solid #ccc', backgroundColor: '#fff' }}>

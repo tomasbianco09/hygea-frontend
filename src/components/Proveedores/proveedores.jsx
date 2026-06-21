@@ -42,7 +42,7 @@ const Proveedores = () => {
 
     const proveedorData = {
       proveedor_id: parseInt(nuevoId),
-      nombre_proveedor: nuevoNombre, // Mapeado exacto a lo que espera tu app.py
+      nombre_proveedor: nuevoNombre, 
       mail_proveedor: nuevoMail,
       tel_proveedor: nuevoTel
     };
@@ -72,11 +72,9 @@ const Proveedores = () => {
     p.proveedor_id.toString().includes(busqueda)
   );
 
-  // --- FUNCIÓN ELIMINAR CORREGIDA ---
+  // --- FUNCIÓN ELIMINAR ---
   const eliminar = (id) => {
     if (window.confirm(`¿Estás seguro de que deseas eliminar al proveedor #${id}?`)) {
-      
-      // ¡Acá cambiamos `${id_prov}` por el `${id}` correcto de la función!
       fetch(`https://hygea-backend-production.up.railway.app/api/proveedores/${id}`, {
         method: 'DELETE'
       })
@@ -85,7 +83,7 @@ const Proveedores = () => {
           return res.json();
         })
         .then(() => {
-          cargarProveedores(); // Refresco automático en pantalla
+          cargarProveedores(); 
         })
         .catch((err) => {
           alert(`⚠️ Restricción SQL: No se puede eliminar el proveedor porque tiene pedidos o medicamentos vinculados en el sistema.`);
@@ -124,7 +122,7 @@ const Proveedores = () => {
               <th>Nombre / Droguería</th>
               <th>Email de Contacto</th>
               <th>Teléfono comercial</th>
-              <th>Acciones</th>
+              <th style={{ textAlignment: 'center' }}>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -143,7 +141,7 @@ const Proveedores = () => {
         </table>
       )}
 
-      {/*  VENTANA MODAL AGREGAR PROVEEDOR  */}
+      {/* VENTANA MODAL AGREGAR PROVEEDOR  */}
       {showModal && (
         <div style={{
           position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',

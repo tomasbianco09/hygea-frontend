@@ -1,3 +1,10 @@
+.page-card {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
 .inv-header {
   display: flex;
   justify-content: space-between;
@@ -37,7 +44,23 @@
   padding: 12px;
   border-bottom: 1px solid var(--color-border-soft);
   color: var(--color-text);
+  vertical-align: middle;
 }
+
+/* ================= SOLUCIÓN AL DESCENTRADO AUTOMÁTICO ================= */
+/* Fuerza el centrado horizontal en la sexta columna (Stock Actual) y séptima (Estado) */
+.inv-tabla th:nth-child(6),
+.inv-tabla td:nth-child(6),
+.inv-tabla th:nth-child(7),
+.inv-tabla td:nth-child(7) {
+  text-align: center;
+}
+
+/* Centrado interno si el elemento dentro de la celda es un span o bloque */
+.inv-tabla td:nth-child(7) {
+  display: table-cell;
+}
+/* ====================================================================== */
 
 .celda-fuerte {
   font-weight: 600;
@@ -68,6 +91,7 @@
 .estado {
   font-weight: 600;
   font-size: 13px;
+  display: inline-block;
 }
 
 .estado.ok { color: var(--color-success); }

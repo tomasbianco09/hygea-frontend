@@ -37,15 +37,67 @@ const Proveedores = () => {
     cargarProveedores();
   }, []);
 
+  // --- 📱 MÁSCARA CON CÓDIGO DE PAÍS MANUAL Y ESPACIADO AUTOMÁTICO 📱 ---
+  const formatearTelefonoFlexible = (valor) => {
+    // Si el usuario borra todo, limpiamos el campo
+    if (!valor) return '';
+
+    // Intentamos separar el código de país escrito manualmente (ej: +54, +56, 0054)
+    // Buscamos si el usuario puso un espacio para separar el prefijo
+    const partes = valor.split(' ');
+    
+    // Si todavía está escribiendo el código de país (no puso espacios)
+    if (partes.length === 1) {
+      return valor; 
+    }
+
+    // Si ya puso un espacio, el primer elemento es el prefijo de país (ej: "+54")
+    const prefijoPais = partes[0];
+    
+    // Juntamos el resto del texto y nos quedamos solo con los números para formatear el cuerpo
+    const cuerpoNumeros = partes.slice(1).join('').replace(/\D/g, '');
+
+    if (cuerpoNumeros.length === 0) {
+      return `${prefijoPais} `;
+    }
+
+    let cuerpoFormateado = '';
+
+    // Aplicamos los espacios y guiones sobre el cuerpo del número según su longitud
+    if (cuerpoNumeros.length <= 3) {
+      // Ej: +54 261
+      cuerpoFormateado = cuerpoNumeros;
+    } else if (cuerpoNumeros.length <= 6) {
+      // Ej: +54 261 425
+      cuerpoFormateado = `${cuerpoNumeros.substring(0, 3)} ${cuerpoNumeros.substring(3)}`;
+    } else {
+      // Ej: +54 261 425-5555 o móviles +54 9 11 2345-6789
+      if (cuerpoNumeros.startsWith('9') && cuerpoNumeros.length > 7) {
+        // Formato móvil AR con el 9 intermedio: prefijo 9 [2 dígitos área] [4 dígitos]-[4 dígitos]
+        cuerpoFormateado = `${cuerpoNumeros.substring(0, 1)} ${cuerpoNumeros.substring(1, 3)} ${cuerpoNumeros.substring(3, 7)}-${cuerpoNumeros.substring(7, 11)}`;
+      } else {
+        // Formato fijo comercial estándar: [3 dígitos] [3 dígitos]-[4 dígitos]
+        cuerpoFormateado = `${cuerpoNumeros.substring(0, 3)} ${cuerpoNumeros.substring(3, 6)}-${cuerpoNumeros.substring(6, 10)}`;
+      }
+    }
+
+    return `${prefijoPais} ${cuerpoFormateado}`.trim();
+  };
+
+  const manejarCambioTelefono = (e) => {
+    const telefonoProcesado = formatearTelefonoFlexible(e.target.value);
+    setNuevoTel(telefonoProcesado);
+  };
+
   // --- FUNCIÓN PARA ENVIAR EL NUEVO PROVEEDOR A PYTHON ---
   const manejarGuardar = (e) => {
     e.preventDefault();
 
     const proveedorData = {
       proveedor_id: parseInt(nuevoId),
-      nombre_proveedor: nuevoNombre, // Mapeado exacto a lo que espera tu app.py
+      nombre_proveedor: nuevoNombre, 
       mail_proveedor: nuevoMail,
-      tel_proveedor: nuevoTel
+      tel_proveedor: nuevoTel 
     };
 
     fetch('https://hygea-backend-production.up.railway.app/api/proveedores', {
@@ -73,11 +125,9 @@ const Proveedores = () => {
     p.proveedor_id.toString().includes(busqueda)
   );
 
-  // --- FUNCIÓN ELIMINAR CORREGIDA ---
+  // --- FUNCIÓN ELIMINAR ---
   const eliminar = (id) => {
     if (window.confirm(`¿Estás seguro de que deseas eliminar al proveedor #${id}?`)) {
-
-      // ¡Acá cambiamos `${id_prov}` por el `${id}` correcto de la función!
       fetch(`https://hygea-backend-production.up.railway.app/api/proveedores/${id}`, {
         method: 'DELETE'
       })
@@ -86,7 +136,7 @@ const Proveedores = () => {
           return res.json();
         })
         .then(() => {
-          cargarProveedores(); // Refresco automático en pantalla
+          cargarProveedores(); 
         })
         .catch(() => {
           alert(`Restricción SQL: No se puede eliminar el proveedor porque tiene pedidos o medicamentos vinculados en el sistema.`);
@@ -172,9 +222,16 @@ const Proveedores = () => {
                 <input type="email" required value={nuevoMail} onChange={e => setNuevoMail(e.target.value)} />
               </label>
 
+              {/* INPUT FLEXIBLE: CÓDIGO DE PAÍS + NÚMERO FORMATEADO AUTOMÁTICO */}
               <label className="form-field">
                 Teléfono Comercial:
-                <input type="text" required value={nuevoTel} onChange={e => setNuevoTel(e.target.value)} />
+                <input 
+                  type="text" 
+                  required 
+                  placeholder="Ej: +54 261 455-5555" 
+                  value={nuevoTel} 
+                  onChange={manejarCambioTelefono} 
+                />
               </label>
 
               <div className="modal-actions">

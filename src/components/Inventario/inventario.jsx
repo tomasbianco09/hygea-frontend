@@ -146,7 +146,7 @@ const Inventario = () => {
         </table>
       )}
 
-      {/* ================= VENTANA MODAL PARA INGRESO DE LOTES VALIDADO ================= */}
+      {/* VENTANA MODAL PARA INGRESO DE LOTES VALIDADO */}
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-box">

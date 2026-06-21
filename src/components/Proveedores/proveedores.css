@@ -32,10 +32,24 @@
   padding: 12px;
   border-bottom: 1px solid var(--color-border-soft);
   color: var(--color-text);
+  vertical-align: middle;
 }
 
 .prov-tabla tr:hover {
   background-color: var(--color-bg-soft);
+}
+
+/* Fuerza a que el título "Acciones" y la celda del botón se alineen perfectamente al centro */
+.prov-tabla th:nth-child(5),
+.prov-tabla td:nth-child(5) {
+  text-align: center;
+}
+
+.acciones {
+  display: flex;
+  justify-content: center; /* Centra el botón horizontalmente */
+  align-items: center;     /* Centra el botón verticalmente */
+  gap: 4px;
 }
 
 .celda-fuerte {
@@ -48,11 +62,6 @@
 
 .celda-mono {
   font-family: monospace;
-}
-
-.acciones {
-  display: flex;
-  gap: 4px;
 }
 
 .prov-footer {

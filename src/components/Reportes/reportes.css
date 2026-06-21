@@ -110,15 +110,38 @@
   padding: 12px;
   border-bottom: 1px solid var(--color-border-soft);
   color: var(--color-text);
+  vertical-align: middle;
 }
 
 .reportes-tabla tr:hover {
   background-color: var(--color-bg-soft);
 }
 
-.col-centro { text-align: center; }
-.col-derecha { text-align: right; }
+/* ================= SOLUCIÓN AL DESALINEADO DE COLUMNAS ================= */
+/* Asegura el comportamiento nativo de celda y fuerza la alineación simétrica */
+.reportes-tabla th.col-centro,
+.reportes-tabla td.col-centro {
+  text-align: center;
+  display: table-cell;
+}
 
-.celda-fuerte { font-weight: 600; }
-.celda-exito { color: var(--color-success); font-weight: 600; }
-.celda-critica { color: var(--color-danger); font-weight: 600; }
+.reportes-tabla th.col-derecha,
+.reportes-tabla td.col-derecha {
+  text-align: right;
+  display: table-cell;
+}
+/* ======================================================================= */
+
+.celda-fuerte { 
+  font-weight: 600; 
+}
+
+.celda-exito { 
+  color: var(--color-success); 
+  font-weight: 600; 
+}
+
+.celda-critica { 
+  color: var(--color-danger); 
+  font-weight: 600; 
+}

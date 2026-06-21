@@ -222,7 +222,7 @@ const Ventas_facturacion = () => {
 
               <label className="form-field">
                 Nombre y Apellido completo:
-                <input type="text" required placeholder="Ej: Tomas..." value={nuevoClienteNombre} onChange={e => setNuevoClienteNombre(e.target.value)} />
+                <input type="text" required placeholder="Ej: Nombre Apellido..." value={nuevoClienteNombre} onChange={e => setNuevoClienteNombre(e.target.value)} />
               </label>
 
               <label className="form-field">
@@ -255,7 +255,7 @@ const Ventas_facturacion = () => {
         </div>
       )}
 
-      {/* ================= MODAL 2: EMITIR VENTA ================= */}
+      {/*  MODAL 2: EMITIR VENTA  */}
       {showVentaModal && (
         <div className="modal-overlay">
           <div className="modal-box modal-lg">

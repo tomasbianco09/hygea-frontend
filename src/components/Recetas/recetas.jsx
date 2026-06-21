@@ -74,7 +74,7 @@ const Recetas = () => {
         setFechaValidez('');
         setClienteSeleccionado('');
       })
-      .catch(err => alert(`⚠️ Error al archivar: ${err.message}`));
+      .catch(err => alert(`Error al archivar: ${err.message}`));
   };
 
   // --- ACCIÓN: LEER/VER RECETA EN PANTALLA ---
@@ -193,7 +193,7 @@ const Recetas = () => {
         </div>
       )}
 
-      {/* ================= MODAL: VISUALIZADOR RECTÁNGULO DE ORDEN MÉDICA ================= */}
+      {/* MODAL: VISUALIZADOR RECTÁNGULO DE ORDEN MÉDICA */}
       {showVerModal && recetaActiva && (
         <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000 }}>
           <div style={{ backgroundColor: '#fff', width: '450px', borderRadius: '6px', border: '2px solid #2c3e50', padding: '25px', boxShadow: '0 8px 25px rgba(0,0,0,0.3)', fontFamily: 'Courier New, monospace' }}>

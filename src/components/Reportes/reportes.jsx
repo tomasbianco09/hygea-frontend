@@ -11,7 +11,6 @@ const Reportes = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Sincronización en paralelo con los endpoints en español de app.py
     Promise.all([
       fetch('https://hygea-backend-production.up.railway.app/api/reportes/mas-vendidos').then(res => {
         if (!res.ok) throw new Error();
@@ -41,7 +40,6 @@ const Reportes = () => {
     <div className="reportes-wrapper">
       <div className="reportes-header">
         <h2 className="reportes-titulo">Reportes y Estadísticas de Auditoría</h2>
-        {/* ❌ El botón de exportar métricas fue removido exitosamente desde aquí */}
       </div>
 
       {error && (

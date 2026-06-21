@@ -83,7 +83,7 @@ const Ventas_facturacion = () => {
         setNuevoClienteFrecuente(false);
         setNuevoClienteOS('');
       })
-      .catch(err => alert(`⚠️ Error al registrar: ${err.message}`));
+      .catch(err => alert(`Error al registrar: ${err.message}`));
   };
 
   // --- FUNCIONES DEL CARRITO ---
@@ -93,12 +93,12 @@ const Ventas_facturacion = () => {
     const cantidad = parseInt(cantidadInput);
     if (!medReal) return;
     if (medReal.stock_actual < cantidad) {
-      alert(`⚠️ Stock insuficiente. Solo quedan ${medReal.stock_actual} unidades.`);
+      alert(`Stock insuficiente. Solo quedan ${medReal.stock_actual} unidades.`);
       return;
     }
     const existente = carrito.find(item => item.medicamento_id === medReal.medicamento_id);
     if (existente) {
-      if (medReal.stock_actual < existente.cantidad + cantidad) { alert("⚠️ Supera el stock."); return; }
+      if (medReal.stock_actual < existente.cantidad + cantidad) { alert("Supera el stock."); return; }
       existente.cantidad += cantidad;
       setCarrito([...carrito]);
     } else {
@@ -122,7 +122,7 @@ const Ventas_facturacion = () => {
 
   const manejarConfirmarVenta = (e) => {
     e.preventDefault();
-    if (carrito.length === 0) { alert("⚠️ El carrito está vacío."); return; }
+    if (carrito.length === 0) { alert("El carrito está vacío."); return; }
     const cObj = obtenerClienteActivo();
     const payload = {
       venta_id: parseInt(nuevaFacturaId),
@@ -141,7 +141,7 @@ const Ventas_facturacion = () => {
     })
       .then(res => { if (!res.ok) return res.json().then(err => { throw new Error(err.error) }); return res.json(); })
       .then(() => { cargarTodoVentas(); setShowVentaModal(false); setNuevaFacturaId(''); setClienteSeleccionado(''); setCarrito([]); })
-      .catch(err => alert(`⚠️ Fallo: ${err.message}`));
+      .catch(err => alert(`Fallo: ${err.message}`));
   };
 
   const ingresosTotales = ventas.reduce((acc, v) => acc + parseFloat(v.total), 0);
@@ -183,7 +183,7 @@ const Ventas_facturacion = () => {
         )}
       </div>
 
-      {/* ================= MODAL 1: REGISTRAR NUEVO CLIENTE ================= */}
+      {/* MODAL 1: REGISTRAR NUEVO CLIENTE */}
       {showClienteModal && (
         <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1100 }}>
           <div style={{ backgroundColor: 'white', padding: '30px', borderRadius: '8px', width: '400px', boxShadow: '0 4px 15px rgba(0,0,0,0.3)' }}>
@@ -230,7 +230,7 @@ const Ventas_facturacion = () => {
         </div>
       )}
 
-      {/* ================= MODAL 2: EMITIR VENTA ================= */}
+      {/* MODAL 2: EMITIR VENTA */}
       {showVentaModal && (
         <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000 }}>
           <div style={{ backgroundColor: 'white', padding: '25px', borderRadius: '8px', width: '650px', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 4px 15px rgba(0,0,0,0.2)' }}>

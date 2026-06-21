@@ -70,7 +70,7 @@ const Inventario = () => {
         setFechaVencimiento('');
         setCantidadStock('');
       })
-      .catch(err => alert(`⚠️ Error de validación: ${err.message}`));
+      .catch(err => alert(`Error de validación: ${err.message}`));
   };
 
   const filtrados = medicamentos.filter((m) =>
@@ -103,7 +103,7 @@ const Inventario = () => {
       />
 
       {cargando ? (
-        <h3 style={{ color: '#34495e' }}>🔄 Conectando con MySQL...</h3>
+        <h3 style={{ color: '#34495e' }}> Conectando con MySQL...</h3>
       ) : (
         <table className="inv-tabla">
           <thead>
@@ -134,14 +134,14 @@ const Inventario = () => {
                     {m.stock_actual < 10 ? 'CRÍTICO' : 'OK'}
                   </span>
                 </td>
-                <td><button className="btn-editar">✏️</button></td>
+                
               </tr>
             ))}
           </tbody>
         </table>
       )}
 
-      {/* ================= VENTANA MODAL PARA INGRESO DE LOTES VALIDADO ================= */}
+      {/* VENTANA MODAL PARA INGRESO DE LOTES VALIDADO */}
       {showModal && (
         <div style={{
           position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
@@ -156,7 +156,7 @@ const Inventario = () => {
                 <input type="text" required placeholder="LOT-XXX-000" value={codigoLote} onChange={e => setCodigoLote(e.target.value)} style={{ padding: '8px', marginTop: '5px', borderRadius: '4px', border: '1px solid #ccc' }} />
               </label>
 
-              {/* 🛡️ AQUÍ ESTÁ EL FILTRO SELECTIVO DINÁMICO CONTRA ERRORES 🛡️ */}
+              {/* FILTRO SELECTIVO DINÁMICO CONTRA ERRORES  */}
               <label style={{ display: 'flex', flexDirection: 'column', fontSize: '14px', fontWeight: 'bold' }}>
                 Seleccionar Medicamento (Catálogo Oficial):
                 <select required value={medSeleccionado} onChange={e => setMedSeleccionado(e.target.value)} style={{ padding: '8px', marginTop: '5px', borderRadius: '4px', border: '1px solid #ccc', backgroundColor: '#fff' }}>

@@ -64,7 +64,7 @@ const Proveedores = () => {
         setNuevoMail('');
         setNuevoTel('');
       })
-      .catch(err => alert(`⚠️ Error al guardar: ${err.message}`));
+      .catch(err => alert(`Error al guardar: ${err.message}`));
   };
 
   const filtrados = proveedores.filter((p) =>
@@ -115,7 +115,7 @@ const Proveedores = () => {
       />
 
       {cargando ? (
-        <h3 style={{ color: '#34495e' }}>🔄 Cargando canales de contacto...</h3>
+        <h3 style={{ color: '#34495e' }}>Cargando canales de contacto...</h3>
       ) : (
         <table className="prov-tabla">
           <thead>
@@ -135,7 +135,6 @@ const Proveedores = () => {
                 <td style={{ color: '#7f8c8d' }}>{p.mail_proveedor}</td>
                 <td style={{ fontFamily: 'monospace' }}>{p.tel_proveedor}</td>
                 <td className="acciones">
-                  <button className="btn-editar">✏️</button>
                   <button className="btn-eliminar" onClick={() => eliminar(p.proveedor_id)}>🗑️</button>
                 </td>
               </tr>
@@ -144,7 +143,7 @@ const Proveedores = () => {
         </table>
       )}
 
-      {/* ================= VENTANA MODAL ================= */}
+      {/*  VENTANA MODAL AGREGAR PROVEEDOR  */}
       {showModal && (
         <div style={{
           position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',

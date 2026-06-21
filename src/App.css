@@ -1,46 +1,34 @@
 /* Contenedor absoluto */
 .app-global-container {
   display: flex;
-  flex-direction: column;    /* Apila el NavBar arriba y el resto abajo */
+  flex-direction: column;
   width: 100vw;
   min-height: 100vh;
   overflow-x: hidden;
-  background-color: #f8fafc;
+  background-color: var(--color-bg);
 }
 
-/* Si tu NavBar tiene un color azul de fondo, asegurate de que ocupe el 100% */
-.navbar, navbar-container {  /* Usá la clase exacta que tenga tu NavBar */
-  width: 100%;
-  height: 60px;              /* Alto fijo para tu barra azul (ajustalo si era diferente) */
-  box-sizing: border-box;
-}
-
-/* El bloque horizontal de abajo (Menú + Contenido) */
 .app-layout {
   display: flex;
-  flex-direction: row;       /* Alinea SideNav y Viewport lado a lado */
-  flex: 1;                   /* Ocupa todo el alto restante de la pantalla */
+  flex-direction: row;
+  flex: 1;
   width: 100%;
 }
 
-/* Menú lateral izquierdo ajustado */
-.sidenav {                   /* Usá la clase exacta de tu componente SideNav */
-  width: 260px;
-  min-width: 260px;
-  /* El alto se calcula automáticamente gracias al flex del padre, 
-     quedando perfectamente encajado abajo del NavBar */
-  background-color: white; 
+.sidenav {
+  width: 250px;
+  min-width: 250px;
+  background-color: var(--color-surface-raised);
 }
 
-/* Contenedor del contenido del módulo y el footer */
 .main-viewport {
   display: flex;
   flex-direction: column;
-  flex: 1;                   /* Ocupa todo el espacio de la derecha */
+  flex: 1;
 }
 
 .content-container {
-  flex: 1;                   /* Empuja al footer al piso */
+  flex: 1;
   padding: 2rem;
   width: 100%;
   box-sizing: border-box;

@@ -8,37 +8,36 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ventas-header-acciones {
+  display: flex;
+  gap: 10px;
 }
 
 .ventas-titulo {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 19px;
+  font-weight: 600;
   margin: 0;
-}
-
-.btn-nueva-venta {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
-  background-color: #22c55e;
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
+  font-family: var(--font-display);
+  color: var(--color-text);
 }
 
 /* Cards */
 .ventas-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
 }
 
 .vcard {
-  background: white;
-  border-radius: 8px;
+  background: var(--color-surface-raised);
+  border-radius: var(--radius-md);
   padding: 20px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -52,49 +51,45 @@
 
 .vcard-label {
   font-size: 13px;
-  color: #64748b;
+  color: var(--color-text-soft);
 }
 
 .vcard-value {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--color-text);
+  font-family: var(--font-display);
 }
 
 .vcard-trend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
   font-size: 13px;
 }
 
-.positivo { color: #22c55e; }
-.negativo { color: #ef4444; }
-.neutro   { color: #64748b; }
+.positivo { color: var(--color-success); }
+.negativo { color: var(--color-danger); }
+.neutro   { color: var(--color-text-soft); }
 
 .vcard-icon {
-  width: 48px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  flex-shrink: 0;
 }
 
-.vcard-icon.azul   { background-color: #dbeafe; }
-.vcard-icon.verde  { background-color: #dcfce7; }
-.vcard-icon.violeta { background-color: #f3e8ff; }
-
-/* Tabla */
-.page-card {
-  background: white;
-  border-radius: 8px;
-  padding: 24px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
+.vcard-icon.tono-petroleo { color: var(--color-primary); background-color: var(--color-primary-soft); }
+.vcard-icon.tono-bronce   { color: var(--color-bronze); background-color: var(--color-bronze-soft); }
 
 .ultimas-titulo {
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   margin: 0 0 16px 0;
+  color: var(--color-text);
 }
 
 .ventas-tabla {
@@ -106,50 +101,125 @@
 .ventas-tabla th {
   text-align: left;
   padding: 10px 12px;
-  background-color: #f8fafc;
+  background-color: var(--color-bg-soft);
   font-weight: 600;
-  color: #374151;
-  border-bottom: 1px solid #e2e8f0;
+  color: var(--color-text-soft);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .ventas-tabla td {
   padding: 12px;
-  border-bottom: 1px solid #f1f5f9;
-  color: #374151;
+  border-bottom: 1px solid var(--color-border-soft);
+  color: var(--color-text);
 }
 
 .ventas-tabla tr:hover {
-  background-color: #f8fafc;
+  background-color: var(--color-bg-soft);
 }
 
-.badge {
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 12px;
+.celda-fuerte { font-weight: 600; }
+
+/* --- Modal: cargar medicamento dentro de "Emitir Venta" --- */
+.carga-medicamento {
+  border: 1px solid var(--color-border);
+  padding: 15px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg-soft);
+}
+
+.carga-medicamento h4 {
+  margin: 0 0 10px 0;
+  color: var(--color-text);
+  font-size: 14px;
   font-weight: 600;
 }
 
-.badge.completado {
-  background-color: #dcfce7;
-  color: #16a34a;
-}
-
-.badge.pendiente {
-  background-color: #e0e7ff;
-  color: #4338ca;
-}
-
-.ventas-acciones {
+.carga-medicamento-body {
   display: flex;
-  gap: 8px;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.btn-ver, .btn-imprimir {
-  background: none;
-  border: none;
-  cursor: pointer;
+.carga-select-med,
+.carga-cantidad,
+.carga-receta {
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-size: 14px;
+}
+
+.carga-medicamento-fila {
+  display: flex;
+  gap: 10px;
+}
+
+.carga-cantidad {
+  width: 70px;
+}
+
+.carga-receta {
+  flex: 1;
+}
+
+/* --- Carrito --- */
+.carrito-box {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  min-height: 60px;
+  padding: 8px;
+}
+
+.carrito-vacio {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  margin: 14px 0;
+}
+
+.carrito-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.carrito-tabla th {
+  text-align: left;
+  border-bottom: 2px solid var(--color-border);
+  color: var(--color-text-soft);
+  padding: 4px 0;
+}
+
+.carrito-tabla td {
+  padding: 5px 0;
+  border-bottom: 1px solid var(--color-border-soft);
+  color: var(--color-text);
+}
+
+.carrito-resumen {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  border-top: 2px solid var(--color-border);
+  padding-top: 10px;
+}
+
+.resumen-subtotal {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.resumen-cobertura {
+  font-size: 13px;
+  color: var(--color-primary);
+}
+
+.resumen-total {
   font-size: 16px;
+  font-weight: 700;
+  color: var(--color-success);
+  font-family: var(--font-display);
 }
-
-.btn-ver { color: #3b82f6; }
-.btn-imprimir { color: #64748b; }

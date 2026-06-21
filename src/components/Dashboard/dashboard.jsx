@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { IconChart, IconAlertTriangle, IconBox } from '../Icons/icons';
 
 export default function Dashboard() {
   // Simulamos datos basados en tu base de datos Hygeia Nexus
@@ -10,27 +11,29 @@ export default function Dashboard() {
   ]);
 
   return (
-    <div style={{ fontFamily: 'Arial, sans-serif', padding: '20px' }}>
-      <h1 style={{ color: '#2c3e50' }}>📊 Panel de Control - Hygeia Nexus</h1>
-      <p>Gestión del sistema de la farmacia y control de stock.</p>
+    <div style={{ fontFamily: 'var(--font-body)', padding: '20px', backgroundColor: 'var(--color-bg)' }}>
+      <h1 style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--color-text)', fontFamily: 'var(--font-display)' }}>
+        <IconChart size={22} /> Panel de Control - Hygeia Nexus
+      </h1>
+      <p style={{ color: 'var(--color-text-soft)' }}>Gestión del sistema de la farmacia y control de stock.</p>
 
       {/* Tarjetas de Resumen Rápido */}
       <div style={{ display: 'flex', gap: '20px', marginBottom: '30px' }}>
-        <div style={{ background: '#e74c3c', color: 'white', padding: '15px', borderRadius: '8px', flex: 1 }}>
-          <h3>⚠️ Alertas de Stock</h3>
+        <div style={{ background: 'var(--color-danger-soft)', color: 'var(--color-danger)', padding: '15px', borderRadius: 'var(--radius-md)', flex: 1 }}>
+          <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><IconAlertTriangle size={18} /> Alertas de Stock</h3>
           <p style={{ fontSize: '24px', fontWeight: 'bold' }}>2 Medicamentos críticos</p>
         </div>
-        <div style={{ background: '#2ecc71', color: 'white', padding: '15px', borderRadius: '8px', flex: 1 }}>
-          <h3>📦 Total Productos</h3>
+        <div style={{ background: 'var(--color-success-soft)', color: 'var(--color-success)', padding: '15px', borderRadius: 'var(--radius-md)', flex: 1 }}>
+          <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><IconBox size={18} /> Total Productos</h3>
           <p style={{ fontSize: '24px', fontWeight: 'bold' }}>{medicamentos.length} Registrados</p>
         </div>
       </div>
 
       {/* Tabla de Stock */}
-      <h2 style={{ color: '#34495e' }}>Inventario de Medicamentos</h2>
+      <h2 style={{ color: 'var(--color-text)', fontFamily: 'var(--font-display)' }}>Inventario de Medicamentos</h2>
       <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
         <thead>
-          <tr style={{ backgroundColor: '#34495e', color: 'white', textAlign: 'left' }}>
+          <tr style={{ backgroundColor: 'var(--color-primary-dark)', color: 'var(--color-text-on-dark)', textAlign: 'left' }}>
             <th style={{ padding: '12px' }}>ID</th>
             <th style={{ padding: '12px' }}>Medicamento</th>
             <th style={{ padding: '12px' }}>Laboratorio</th>
@@ -40,15 +43,15 @@ export default function Dashboard() {
         </thead>
         <tbody>
           {medicamentos.map((med) => (
-            <tr key={med.id} style={{ borderBottom: '1px solid #ddd' }}>
+            <tr key={med.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
               <td style={{ padding: '12px' }}>{med.id}</td>
               <td style={{ padding: '12px', fontWeight: 'bold' }}>{med.nombre}</td>
               <td style={{ padding: '12px' }}>{med.laboratorio}</td>
               <td style={{ padding: '12px' }}>${med.precio}</td>
-              <td style={{ 
-                padding: '12px', 
-                color: med.stock < 10 ? '#e74c3c' : '#27ae60', 
-                fontWeight: 'bold' 
+              <td style={{
+                padding: '12px',
+                color: med.stock < 10 ? 'var(--color-danger)' : 'var(--color-success)',
+                fontWeight: 'bold'
               }}>
                 {med.stock} {med.stock < 10 ? '(Stock Bajo)' : '(Ok)'}
               </td>

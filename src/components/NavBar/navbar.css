@@ -47,15 +47,3 @@
   opacity: 0.82;
   font-size: 13.5px;
 }
-
-.navbar-bell {
-  display: inline-flex;
-  color: var(--color-text-on-dark);
-  opacity: 0.82;
-  cursor: pointer;
-  position: relative;
-}
-
-.navbar-bell:hover {
-  opacity: 1;
-}

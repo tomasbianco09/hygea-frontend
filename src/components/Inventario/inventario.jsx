@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { IconAlertTriangle, IconSearch, IconRefresh, IconPencil, IconBox } from '../Icons/icons';
+import { IconAlertTriangle, IconSearch, IconRefresh, IconBox } from '../Icons/icons';
 import './inventario.css';
 
 const estadoClase = (estado) => {
@@ -122,7 +122,6 @@ const Inventario = () => {
               <th>Precio Venta</th>
               <th>Stock Actual</th>
               <th>Estado</th>
-              <th>Acción</th>
             </tr>
           </thead>
           <tbody>
@@ -141,7 +140,6 @@ const Inventario = () => {
                     {m.stock_actual < 10 ? 'CRÍTICO' : 'OK'}
                   </span>
                 </td>
-                <td><button className="btn-icon" title="Editar"><IconPencil size={16} /></button></td>
               </tr>
             ))}
           </tbody>

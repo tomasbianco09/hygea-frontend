@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconPill, IconBell } from '../Icons/icons';
+import { IconPill } from '../Icons/icons';
 import './navbar.css';
 
 const NavBar = () => {
@@ -11,7 +11,6 @@ const NavBar = () => {
       </div>
       <div className="navbar-right">
         <span className="navbar-sucursal">COFAM &middot; Mendoza</span>
-        <span className="navbar-bell"><IconBell size={18} /></span>
       </div>
     </nav>
   );

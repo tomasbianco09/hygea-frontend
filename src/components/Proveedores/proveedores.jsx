@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { IconAlertTriangle, IconSearch, IconRefresh, IconPencil, IconTrash, IconFactory } from '../Icons/icons';
+import { IconAlertTriangle, IconSearch, IconRefresh, IconTrash, IconFactory } from '../Icons/icons';
 import './proveedores.css';
 
 const Proveedores = () => {
@@ -142,7 +142,6 @@ const Proveedores = () => {
                 <td className="celda-suave">{p.mail_proveedor}</td>
                 <td className="celda-mono">{p.tel_proveedor}</td>
                 <td className="acciones">
-                  <button className="btn-icon" title="Editar"><IconPencil size={16} /></button>
                   <button className="btn-icon danger" title="Eliminar" onClick={() => eliminar(p.proveedor_id)}><IconTrash size={16} /></button>
                 </td>
               </tr>

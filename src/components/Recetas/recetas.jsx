@@ -156,7 +156,7 @@ const Recetas = () => {
         </div>
       )}
 
-      {/* ================= MODAL: CARGAR NUEVA RECETA ================= */}
+      {/*  MODAL: CARGAR NUEVA RECETA  */}
       {showNuevaModal && (
         <div className="modal-overlay">
           <div className="modal-box">
@@ -198,7 +198,7 @@ const Recetas = () => {
         </div>
       )}
 
-      {/* ================= MODAL: VISUALIZADOR DE ORDEN MÉDICA ================= */}
+      {/*  MODAL: VISUALIZADOR DE ORDEN MÉDICA  */}
       {showVerModal && recetaActiva && (
         <div className="modal-overlay">
           <div className="receta-visor">

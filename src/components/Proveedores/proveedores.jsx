@@ -37,7 +37,7 @@ const Proveedores = () => {
     cargarProveedores();
   }, []);
 
-  // --- 📱 MÁSCARA CON CÓDIGO DE PAÍS MANUAL Y ESPACIADO AUTOMÁTICO 📱 ---
+  // --- SECCION PARA ESPACIAR AUTOMATICAMENTE EL VALOR AL INGRESAR UN TELEFONO ---
   const formatearTelefonoFlexible = (valor) => {
     // Si el usuario borra todo, limpiamos el campo
     if (!valor) return '';
@@ -63,7 +63,7 @@ const Proveedores = () => {
 
     let cuerpoFormateado = '';
 
-    // Aplicamos los espacios y guiones sobre el cuerpo del número según su longitud
+    // Aplicamos los espacios y guiones sobre el cuerpo del numero segun su longitud
     if (cuerpoNumeros.length <= 3) {
       // Ej: +54 261
       cuerpoFormateado = cuerpoNumeros;
@@ -200,7 +200,7 @@ const Proveedores = () => {
         </table>
       )}
 
-      {/* ================= VENTANA MODAL ================= */}
+      {/*  VENTANA MODAL  */}
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-box">

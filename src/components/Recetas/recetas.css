@@ -11,29 +11,11 @@
 }
 
 .recetas-titulo {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 19px;
+  font-weight: 600;
   margin: 0;
-}
-
-.btn-nueva-receta {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
-  background-color: #22c55e;
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.recetas-info {
-  background-color: #eff6ff;
-  border-left: 4px solid #3b82f6;
-  padding: 10px 16px;
-  color: #3b82f6;
-  font-size: 14px;
-  border-radius: 4px;
+  font-family: var(--font-display);
+  color: var(--color-text);
 }
 
 .recetas-filtros {
@@ -42,44 +24,36 @@
   align-items: center;
 }
 
-.recetas-buscar {
-  flex: 1;
-  padding: 10px 16px;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  font-size: 14px;
-  outline: none;
-  box-sizing: border-box;
-}
-
 .recetas-select {
   padding: 10px 12px;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
   font-size: 14px;
   outline: none;
-  background: white;
+  background: var(--color-surface);
+  color: var(--color-text);
   cursor: pointer;
 }
 
 /* Grid de cards */
 .recetas-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 20px;
 }
 
 .receta-card {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  background: var(--color-surface-raised);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
 .receta-card-header {
-  background-color: #3b82f6;
+  background-color: var(--color-primary-dark);
   padding: 14px 16px;
   display: flex;
   flex-direction: column;
@@ -87,13 +61,14 @@
 }
 
 .receta-id {
-  color: white;
+  color: var(--color-text-on-dark);
   font-weight: 700;
   font-size: 15px;
 }
 
 .receta-medico {
-  color: #bfdbfe;
+  color: var(--color-text-on-dark);
+  opacity: 0.75;
   font-size: 13px;
 }
 
@@ -106,62 +81,129 @@
 }
 
 .receta-paciente,
-.receta-fecha {
+.receta-fecha,
+.receta-cobertura {
   margin: 0;
   font-size: 14px;
-  color: #374151;
+  color: var(--color-text-soft);
 }
 
-.badge-psico {
+.receta-cobertura {
+  font-size: 13px;
+}
+
+.badge-controlado {
   display: inline-block;
-  background-color: #f3e8ff;
-  color: #9333ea;
-  padding: 2px 10px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 500;
-  margin: 6px 0;
+  margin-top: 10px;
+  background-color: var(--color-warning-soft);
+  color: var(--color-warning);
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
   width: fit-content;
-}
-
-.receta-med-titulo {
-  margin: 8px 0 4px;
-  font-size: 14px;
-  color: #1e293b;
-}
-
-.receta-med-lista {
-  margin: 0;
-  padding-left: 20px;
-  font-size: 14px;
-  color: #374151;
-}
-
-.receta-med-lista li {
-  margin-bottom: 4px;
 }
 
 .receta-card-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 12px 16px;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid var(--color-border-soft);
 }
 
 .btn-ver {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   background: none;
   border: none;
-  color: #3b82f6;
+  color: var(--color-primary);
   cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 13.5px;
+  font-weight: 600;
+  width: 100%;
+  justify-content: center;
+  padding: 4px 0;
 }
 
-.btn-descargar {
-  background: none;
-  border: none;
-  color: #64748b;
-  cursor: pointer;
-  font-size: 14px;
+.btn-ver:hover {
+  color: var(--color-primary-dark);
+}
+
+/* --- Visor de orden médica (estilo "receta impresa") --- */
+.receta-visor {
+  background-color: var(--color-surface);
+  width: 450px;
+  max-width: 100%;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-primary-dark);
+  padding: 26px;
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-body);
+}
+
+.visor-encabezado {
+  text-align: center;
+  border-bottom: 2px dashed var(--color-border);
+  padding-bottom: 14px;
+}
+
+.visor-encabezado h2 {
+  margin: 0;
+  color: var(--color-primary-dark);
+  font-size: 19px;
+  letter-spacing: 0.5px;
+  font-family: var(--font-display);
+}
+
+.visor-encabezado p {
+  margin: 5px 0 0 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
+}
+
+.visor-cuerpo {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 14.5px;
+  color: var(--color-text);
+}
+
+.visor-cuerpo p {
+  margin: 0;
+}
+
+.visor-tratamiento {
+  border-top: 1px solid var(--color-border);
+  margin-top: 8px;
+  padding-top: 10px;
+}
+
+.visor-rp {
+  margin: 0 0 8px 0;
+  font-weight: 700;
+  color: var(--color-wine);
+}
+
+.visor-tratamiento ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.visor-tratamiento li {
+  margin: 4px 0;
+  font-weight: 600;
+}
+
+.visor-pie {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+  border-top: 2px dashed var(--color-border);
+  padding-top: 14px;
 }

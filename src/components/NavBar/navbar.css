@@ -2,43 +2,74 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1a56db;
+  background-color: var(--color-primary-dark);
   padding: 0 24px;
-  height: 56px;
+  height: 58px;
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: var(--shadow-sm);
 }
 
 .navbar-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 11px;
 }
 
 .navbar-icon {
-  font-size: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgba(246, 242, 232, 0.12);
+  color: var(--color-text-on-dark);
 }
 
 .navbar-title {
-  color: white;
-  font-size: 18px;
-  font-weight: 600;
+  color: var(--color-text-on-dark);
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
 }
 
 .navbar-sucursal {
-  color: white;
-  font-size: 14px;
+  color: var(--color-text-on-dark);
+  opacity: 0.82;
+  font-size: 13.5px;
 }
 
-.navbar-bell {
-  font-size: 20px;
+.navbar-usuario {
+  color: var(--color-text-on-dark);
+  font-size: 13.5px;
+  font-weight: 600;
+  opacity: 0.95;
+  padding-left: 4px;
+  border-left: 1px solid rgba(246, 242, 232, 0.25);
+}
+
+.navbar-logout {
+  background: rgba(246, 242, 232, 0.1);
+  border: 1px solid rgba(246, 242, 232, 0.25);
+  color: var(--color-text-on-dark);
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  position: relative;
+  transition: background 0.15s ease;
+}
+
+.navbar-logout:hover {
+  background: rgba(246, 242, 232, 0.2);
 }

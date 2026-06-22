@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { IconAlertTriangle, IconSearch, IconRefresh, IconTrash, IconFactory } from '../Icons/icons';
 import './proveedores.css';
 
 const Proveedores = () => {
@@ -36,6 +37,58 @@ const Proveedores = () => {
     cargarProveedores();
   }, []);
 
+  // --- 📱 MÁSCARA CON CÓDIGO DE PAÍS MANUAL Y ESPACIADO AUTOMÁTICO 📱 ---
+  const formatearTelefonoFlexible = (valor) => {
+    // Si el usuario borra todo, limpiamos el campo
+    if (!valor) return '';
+
+    // Intentamos separar el código de país escrito manualmente (ej: +54, +56, 0054)
+    // Buscamos si el usuario puso un espacio para separar el prefijo
+    const partes = valor.split(' ');
+    
+    // Si todavía está escribiendo el código de país (no puso espacios)
+    if (partes.length === 1) {
+      return valor; 
+    }
+
+    // Si ya puso un espacio, el primer elemento es el prefijo de país (ej: "+54")
+    const prefijoPais = partes[0];
+    
+    // Juntamos el resto del texto y nos quedamos solo con los números para formatear el cuerpo
+    const cuerpoNumeros = partes.slice(1).join('').replace(/\D/g, '');
+
+    if (cuerpoNumeros.length === 0) {
+      return `${prefijoPais} `;
+    }
+
+    let cuerpoFormateado = '';
+
+    // Aplicamos los espacios y guiones sobre el cuerpo del número según su longitud
+    if (cuerpoNumeros.length <= 3) {
+      // Ej: +54 261
+      cuerpoFormateado = cuerpoNumeros;
+    } else if (cuerpoNumeros.length <= 6) {
+      // Ej: +54 261 425
+      cuerpoFormateado = `${cuerpoNumeros.substring(0, 3)} ${cuerpoNumeros.substring(3)}`;
+    } else {
+      // Ej: +54 261 425-5555 o móviles +54 9 11 2345-6789
+      if (cuerpoNumeros.startsWith('9') && cuerpoNumeros.length > 7) {
+        // Formato móvil AR con el 9 intermedio: prefijo 9 [2 dígitos área] [4 dígitos]-[4 dígitos]
+        cuerpoFormateado = `${cuerpoNumeros.substring(0, 1)} ${cuerpoNumeros.substring(1, 3)} ${cuerpoNumeros.substring(3, 7)}-${cuerpoNumeros.substring(7, 11)}`;
+      } else {
+        // Formato fijo comercial estándar: [3 dígitos] [3 dígitos]-[4 dígitos]
+        cuerpoFormateado = `${cuerpoNumeros.substring(0, 3)} ${cuerpoNumeros.substring(3, 6)}-${cuerpoNumeros.substring(6, 10)}`;
+      }
+    }
+
+    return `${prefijoPais} ${cuerpoFormateado}`.trim();
+  };
+
+  const manejarCambioTelefono = (e) => {
+    const telefonoProcesado = formatearTelefonoFlexible(e.target.value);
+    setNuevoTel(telefonoProcesado);
+  };
+
   // --- FUNCIÓN PARA ENVIAR EL NUEVO PROVEEDOR A PYTHON ---
   const manejarGuardar = (e) => {
     e.preventDefault();
@@ -44,7 +97,7 @@ const Proveedores = () => {
       proveedor_id: parseInt(nuevoId),
       nombre_proveedor: nuevoNombre, 
       mail_proveedor: nuevoMail,
-      tel_proveedor: nuevoTel
+      tel_proveedor: nuevoTel 
     };
 
     fetch('https://hygea-backend-production.up.railway.app/api/proveedores', {
@@ -85,8 +138,8 @@ const Proveedores = () => {
         .then(() => {
           cargarProveedores(); 
         })
-        .catch((err) => {
-          alert(`⚠️ Restricción SQL: No se puede eliminar el proveedor porque tiene pedidos o medicamentos vinculados en el sistema.`);
+        .catch(() => {
+          alert(`Restricción SQL: No se puede eliminar el proveedor porque tiene pedidos o medicamentos vinculados en el sistema.`);
         });
     }
   };
@@ -95,25 +148,31 @@ const Proveedores = () => {
     <div className="page-card">
       <div className="prov-header">
         <h2 className="prov-titulo">Gestión de Proveedores (En Vivo)</h2>
-        <button className="btn-nuevo" onClick={() => setShowModal(true)}>+ Nuevo Proveedor</button>
+        <button className="btn btn-primary" onClick={() => setShowModal(true)}>+ Nuevo Proveedor</button>
       </div>
 
-      <div className="prov-info">
+      <div className="info-banner">
         Administre los canales de contacto directos de las droguerías homologadas.
       </div>
 
-      {error && <div style={{ color: '#e74c3c', marginBottom: '15px', fontWeight: 'bold' }}>⚠️ {error}</div>}
+      {error && (
+        <div className="alert-banner">
+          <IconAlertTriangle size={16} /> {error}
+        </div>
+      )}
 
-      <input
-        className="prov-buscar"
-        type="text"
-        placeholder="🔍 Buscar proveedores por ID o Nombre..."
-        value={busqueda}
-        onChange={(e) => setBusqueda(e.target.value)}
-      />
+      <div className="search-field">
+        <IconSearch size={16} />
+        <input
+          type="text"
+          placeholder="Buscar proveedores por ID o Nombre..."
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+        />
+      </div>
 
       {cargando ? (
-        <h3 style={{ color: '#34495e' }}>Cargando canales de contacto...</h3>
+        <div className="loading-text"><IconRefresh size={16} className="spin" /> Cargando canales de contacto...</div>
       ) : (
         <table className="prov-tabla">
           <thead>
@@ -122,18 +181,18 @@ const Proveedores = () => {
               <th>Nombre / Droguería</th>
               <th>Email de Contacto</th>
               <th>Teléfono comercial</th>
-              <th style={{ textAlignment: 'center' }}>Acciones</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             {filtrados.map((p) => (
               <tr key={p.proveedor_id}>
                 <td>#{p.proveedor_id}</td>
-                <td style={{ fontWeight: 'bold', color: '#2c3e50' }}>{p.nombre_proveedor}</td>
-                <td style={{ color: '#7f8c8d' }}>{p.mail_proveedor}</td>
-                <td style={{ fontFamily: 'monospace' }}>{p.tel_proveedor}</td>
+                <td className="celda-fuerte">{p.nombre_proveedor}</td>
+                <td className="celda-suave">{p.mail_proveedor}</td>
+                <td className="celda-mono">{p.tel_proveedor}</td>
                 <td className="acciones">
-                  <button className="btn-eliminar" onClick={() => eliminar(p.proveedor_id)}>🗑️</button>
+                  <button className="btn-icon danger" title="Eliminar" onClick={() => eliminar(p.proveedor_id)}><IconTrash size={16} /></button>
                 </td>
               </tr>
             ))}
@@ -141,39 +200,43 @@ const Proveedores = () => {
         </table>
       )}
 
-      {/* VENTANA MODAL AGREGAR PROVEEDOR  */}
+      {/* ================= VENTANA MODAL ================= */}
       {showModal && (
-        <div style={{
-          position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
-          backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000
-        }}>
-          <div style={{ backgroundColor: 'white', padding: '30px', borderRadius: '8px', width: '400px', boxShadow: '0 4px 15px rgba(0,0,0,0.2)' }}>
-            <h3 style={{ marginTop: 0, color: '#2c3e50', marginBottom: '20px' }}>📦 Registrar Nuevo Proveedor</h3>
-            <form onSubmit={manejarGuardar} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-              
-              <label style={{ display: 'flex', flexDirection: 'column', fontSize: '14px', fontWeight: 'bold' }}>
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3 className="modal-title"><IconFactory size={18} /> Registrar Nuevo Proveedor</h3>
+            <form onSubmit={manejarGuardar} className="modal-form">
+
+              <label className="form-field">
                 ID del Proveedor (Numérico único):
-                <input type="number" required value={nuevoId} onChange={e => setNuevoId(e.target.value)} style={{ padding: '8px', marginTop: '5px', borderRadius: '4px', border: '1px solid #ccc' }} />
+                <input type="number" required value={nuevoId} onChange={e => setNuevoId(e.target.value)} />
               </label>
 
-              <label style={{ display: 'flex', flexDirection: 'column', fontSize: '14px', fontWeight: 'bold' }}>
+              <label className="form-field">
                 Nombre de la Droguería:
-                <input type="text" required value={nuevoNombre} onChange={e => setNuevoNombre(e.target.value)} style={{ padding: '8px', marginTop: '5px', borderRadius: '4px', border: '1px solid #ccc' }} />
+                <input type="text" required value={nuevoNombre} onChange={e => setNuevoNombre(e.target.value)} />
               </label>
 
-              <label style={{ display: 'flex', flexDirection: 'column', fontSize: '14px', fontWeight: 'bold' }}>
+              <label className="form-field">
                 Correo Electrónico:
-                <input type="email" required value={nuevoMail} onChange={e => setNuevoMail(e.target.value)} style={{ padding: '8px', marginTop: '5px', borderRadius: '4px', border: '1px solid #ccc' }} />
+                <input type="email" required value={nuevoMail} onChange={e => setNuevoMail(e.target.value)} />
               </label>
 
-              <label style={{ display: 'flex', flexDirection: 'column', fontSize: '14px', fontWeight: 'bold' }}>
+              {/* INPUT FLEXIBLE: CÓDIGO DE PAÍS + NÚMERO FORMATEADO AUTOMÁTICO */}
+              <label className="form-field">
                 Teléfono Comercial:
-                <input type="text" required value={nuevoTel} onChange={e => setNuevoTel(e.target.value)} style={{ padding: '8px', marginTop: '5px', borderRadius: '4px', border: '1px solid #ccc' }} />
+                <input 
+                  type="text" 
+                  required 
+                  placeholder="Ej: +54 261 455-5555" 
+                  value={nuevoTel} 
+                  onChange={manejarCambioTelefono} 
+                />
               </label>
 
-              <div style={{ display: 'flex', justifyContent: 'end', gap: '10px', marginTop: '10px' }}>
-                <button type="button" onClick={() => setShowModal(false)} style={{ padding: '8px 15px', background: '#95a5a6', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Cancelar</button>
-                <button type="submit" style={{ padding: '8px 15px', background: '#2ecc71', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>Guardar en BD</button>
+              <div className="modal-actions">
+                <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Cancelar</button>
+                <button type="submit" className="btn btn-primary">Guardar en BD</button>
               </div>
 
             </form>

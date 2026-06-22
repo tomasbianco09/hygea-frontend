@@ -1,10 +1,3 @@
-.page-card {
-  background: white;
-  border-radius: 8px;
-  padding: 24px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
 .prov-header {
   display: flex;
   justify-content: space-between;
@@ -13,41 +6,11 @@
 }
 
 .prov-titulo {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 19px;
+  font-weight: 600;
   margin: 0;
-}
-
-.btn-nuevo {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
-  background-color: #22c55e;
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.prov-info {
-  background-color: #eff6ff;
-  border-left: 4px solid #3b82f6;
-  padding: 10px 16px;
-  color: #3b82f6;
-  font-size: 14px;
-  margin-bottom: 16px;
-  border-radius: 4px;
-}
-
-.prov-buscar {
-  width: 100%;
-  padding: 10px 16px;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  font-size: 14px;
-  margin-bottom: 20px;
-  box-sizing: border-box;
-  outline: none;
+  font-family: var(--font-display);
+  color: var(--color-text);
 }
 
 .prov-tabla {
@@ -59,55 +22,50 @@
 .prov-tabla th {
   text-align: left;
   padding: 10px 12px;
-  background-color: #f8fafc;
+  background-color: var(--color-bg-soft);
   font-weight: 600;
-  color: #374151;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-/* Forzar que el título de la columna acciones también maneje simetría central */
-.prov-tabla th:last-child {
-  text-align: center;
+  color: var(--color-text-soft);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .prov-tabla td {
   padding: 12px;
-  border-bottom: 1px solid #f1f5f9;
-  color: #374151;
-  vertical-align: middle; /* Centrado vertical en la celda nativa */
+  border-bottom: 1px solid var(--color-border-soft);
+  color: var(--color-text);
+  vertical-align: middle;
 }
 
 .prov-tabla tr:hover {
-  background-color: #f8fafc;
+  background-color: var(--color-bg-soft);
 }
 
-/* Solución al descentrado: Flexbox alineando al centro del espacio asignado */
+/* Fuerza a que el título "Acciones" y la celda del botón se alineen perfectamente al centro */
+.prov-tabla th:nth-child(5),
+.prov-tabla td:nth-child(5) {
+  text-align: center;
+}
+
 .acciones {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+  justify-content: center; /* Centra el botón horizontalmente */
+  align-items: center;     /* Centra el botón verticalmente */
+  gap: 4px;
 }
 
-.btn-eliminar {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  color: #ef4444;
-  padding: 4px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  transition: transform 0.1s ease;
+.celda-fuerte {
+  font-weight: 600;
 }
 
-.btn-eliminar:hover {
-  transform: scale(1.15); /* Efecto sutil al pasar el mouse */
+.celda-suave {
+  color: var(--color-text-soft);
+}
+
+.celda-mono {
+  font-family: monospace;
 }
 
 .prov-footer {
   margin-top: 16px;
   font-size: 13px;
-  color: #64748b;
+  color: var(--color-text-soft);
 }

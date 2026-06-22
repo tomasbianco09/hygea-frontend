@@ -1,4 +1,5 @@
 import React from 'react';
+import { IconBox, IconReceipt, IconClipboard, IconChart } from '../Icons/icons';
 import './home.css';
 
 const Home = () => {
@@ -11,7 +12,7 @@ const Home = () => {
     <div className="home-container">
       {/* Cabecera Principal */}
       <header className="home-header">
-        <div className="header-meta">Sucursal Centro Activa • {fechaHoy}</div>
+        <div className="header-meta">Sucursal Centro Activa &middot; {fechaHoy}</div>
         <h1>Hygeia Nexus</h1>
         <p className="subtitle">Ecosistema Integrado de Control Farmacéutico y Auditoría Médica</p>
       </header>
@@ -21,8 +22,8 @@ const Home = () => {
         <div className="hero-content">
           <h2>Operaciones en Tiempo Real (Nube Activa)</h2>
           <p>
-            Bienvenido al panel central de administración. La terminal se encuentra conectada de forma directa 
-            al servidor MySQL. Monitoree las existencias críticas de medicamentos, valide recetas y gestione 
+            Bienvenido al panel central de administración. La terminal se encuentra conectada de forma directa
+            al servidor MySQL. Monitoree las existencias críticas de medicamentos, valide recetas y gestione
             transacciones de obras sociales de manera segura.
           </p>
         </div>
@@ -31,27 +32,27 @@ const Home = () => {
       {/* Grilla de Accesos Rápidos Reales */}
       <section className="features-section">
         <div className="features-grid">
-          
+
           <div className="feature-card">
-            <div className="feature-icon font-azul">💊</div>
+            <div className="feature-icon tono-petroleo"><IconBox size={22} /></div>
             <h3>Control de Stock</h3>
             <p>Monitoree las existencias del catálogo oficial y registre ingresos de lotes críticos antes de su vencimiento.</p>
           </div>
 
           <div className="feature-card">
-            <div className="feature-icon font-verde">🧾</div>
+            <div className="feature-icon tono-bronce"><IconReceipt size={22} /></div>
             <h3>Facturación / Ventas</h3>
             <p>Abra el mostrador digital para emitir comprobantes, armar carritos y aplicar coberturas de mutuales en vivo.</p>
           </div>
 
           <div className="feature-card">
-            <div className="feature-icon font-naranja">📋</div>
+            <div className="feature-icon tono-vino"><IconClipboard size={22} /></div>
             <h3>Archivo de Recetas</h3>
             <p>Audite las órdenes médicas y valide matrículas profesionales para la dispensa regulada de psicotrópicos.</p>
           </div>
 
           <div className="feature-card">
-            <div className="feature-icon font-violeta">📊</div>
+            <div className="feature-icon tono-pizarra"><IconChart size={22} /></div>
             <h3>Estadísticas y Rotación</h3>
             <p>Acceda a las métricas del negocio con balances de ingresos brutos y rankings de categorías más vendidas.</p>
           </div>
@@ -59,7 +60,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Estado del Sistema */}
+      {/* Estado del Sistema — verificador de servidor en la nube */}
       <footer className="home-status">
         <span className="status-indicator"></span> Servidores en la nube operando de forma reglamentaria
       </footer>

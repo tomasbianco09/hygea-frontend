@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { IconAlertTriangle, IconRefresh, IconArrowUp, IconCart, IconNote, IconUsers, IconReceipt } from '../Icons/icons';
 import './ventas-fact.css';
 
 const Ventas_facturacion = () => {
@@ -134,10 +135,10 @@ const Ventas_facturacion = () => {
     };
 
     // CORREGIDO: Ruta migrada a producción en Railway para evitar bloqueo local
-    fetch('https://hygea-backend-production.up.railway.app/api/ventas', { 
-      method: 'POST', 
-      headers: { 'Content-Type': 'application/json' }, 
-      body: JSON.stringify(payload) 
+    fetch('https://hygea-backend-production.up.railway.app/api/ventas', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
     })
       .then(res => { if (!res.ok) return res.json().then(err => { throw new Error(err.error) }); return res.json(); })
       .then(() => { cargarTodoVentas(); setShowVentaModal(false); setNuevaFacturaId(''); setClienteSeleccionado(''); setCarrito([]); })
@@ -150,22 +151,42 @@ const Ventas_facturacion = () => {
     <div className="ventas-wrapper">
       <div className="ventas-header">
         <h2 className="ventas-titulo">Ventas y Facturación (En Vivo)</h2>
-        <div style={{ display: 'flex', gap: '10px' }}>
-          <button className="btn-nuevo" style={{ backgroundColor: '#3498db', color: 'white', border: 'none', padding: '10px 15px', borderRadius: '4px', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => setShowClienteModal(true)}>+ Registrar Cliente</button>
-          <button className="btn-nueva-venta" onClick={() => setShowVentaModal(true)}>+ Nueva Venta</button>
+        <div className="ventas-header-acciones">
+          <button className="btn btn-secondary" onClick={() => setShowClienteModal(true)}>+ Registrar Cliente</button>
+          <button className="btn btn-primary" onClick={() => setShowVentaModal(true)}>+ Nueva Venta</button>
         </div>
       </div>
 
-      {error && <div style={{ backgroundColor: '#fde8e8', color: '#e74c3c', padding: '10px', borderRadius: '5px', marginBottom: '15px', fontWeight: 'bold' }}>⚠️ {error}</div>}
+      {error && (
+        <div className="alert-banner">
+          <IconAlertTriangle size={16} /> {error}
+        </div>
+      )}
 
       <div className="ventas-cards">
-        <div className="vcard"><div className="vcard-info"><span className="vcard-label">Caja Total (BD)</span><span className="vcard-value">${ingresosTotales.toLocaleString('es-AR', { minimumFractionDigits: 2 })}</span><span className="vcard-trend positivo">↑ Acumulado</span></div><div className="vcard-icon azul">🛒</div></div>
-        <div className="vcard"><div className="vcard-info"><span className="vcard-label">Operaciones</span><span className="vcard-value">{ventas.length}</span><span className="vcard-trend neutro">Facturas</span></div><div className="vcard-icon verde">📝</div></div>
+        <div className="vcard">
+          <div className="vcard-info">
+            <span className="vcard-label">Caja Total (BD)</span>
+            <span className="vcard-value">${ingresosTotales.toLocaleString('es-AR', { minimumFractionDigits: 2 })}</span>
+            <span className="vcard-trend positivo"><IconArrowUp size={13} /> Acumulado</span>
+          </div>
+          <div className="vcard-icon tono-petroleo"><IconCart size={20} /></div>
+        </div>
+        <div className="vcard">
+          <div className="vcard-info">
+            <span className="vcard-label">Operaciones</span>
+            <span className="vcard-value">{ventas.length}</span>
+            <span className="vcard-trend neutro">Facturas</span>
+          </div>
+          <div className="vcard-icon tono-bronce"><IconNote size={20} /></div>
+        </div>
       </div>
 
       <div className="page-card">
         <h3 className="ultimas-titulo">Historial de Auditoría Interna</h3>
-        {cargando ? <h3 style={{ color: '#34495e', padding: '20px' }}>🔄 Consultando registros...</h3> : (
+        {cargando ? (
+          <div className="loading-text"><IconRefresh size={16} className="spin" /> Consultando registros...</div>
+        ) : (
           <table className="ventas-tabla">
             <thead>
               <tr><th>Factura #</th><th>Cliente / Paciente</th><th>Fecha Emisión</th><th>Método de Pago</th><th>Obra Social</th><th>Monto Total</th><th>Estado</th></tr>
@@ -173,9 +194,13 @@ const Ventas_facturacion = () => {
             <tbody>
               {ventas.map((v) => (
                 <tr key={v.factura}>
-                  <td><strong>#{v.factura}</strong></td><td>{v.cliente}</td><td>{v.fecha}</td><td>{v.metodo_pago}</td>
-                  <td><span className={v.obraSocial !== '-' ? 'badge-psico' : ''} style={{ backgroundColor: v.obraSocial !== '-' ? '#3498db' : 'transparent', color: v.obraSocial !== '-' ? 'white' : 'inherit', padding: v.obraSocial !== '-' ? '3px 8px' : '0', borderRadius: '3px', fontSize: '12px', fontWeight: 'bold' }}>{v.obraSocial}</span></td>
-                  <td style={{ fontWeight: 'bold', color: '#2c3e50' }}>${parseFloat(v.total).toFixed(2)}</td><td><span className="badge completado">COMPLETADO</span></td>
+                  <td><strong>#{v.factura}</strong></td>
+                  <td>{v.cliente}</td>
+                  <td>{v.fecha}</td>
+                  <td>{v.metodo_pago}</td>
+                  <td>{v.obraSocial !== '-' ? <span className="badge-soft petroleo">{v.obraSocial}</span> : v.obraSocial}</td>
+                  <td className="celda-fuerte">${parseFloat(v.total).toFixed(2)}</td>
+                  <td><span className="badge-soft exito">COMPLETADO</span></td>
                 </tr>
               ))}
             </tbody>
@@ -183,31 +208,31 @@ const Ventas_facturacion = () => {
         )}
       </div>
 
-      {/* MODAL 1: REGISTRAR NUEVO CLIENTE */}
+      {/* ================= MODAL 1: REGISTRAR NUEVO CLIENTE ================= */}
       {showClienteModal && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1100 }}>
-          <div style={{ backgroundColor: 'white', padding: '30px', borderRadius: '8px', width: '400px', boxShadow: '0 4px 15px rgba(0,0,0,0.3)' }}>
-            <h3 style={{ marginTop: 0, color: '#2c3e50', marginBottom: '20px' }}>👥 Ficha de Nuevo Cliente</h3>
-            <form onSubmit={manejarGuardarCliente} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-              
-              <label style={{ display: 'flex', flexDirection: 'column', fontSize: '13px', fontWeight: 'bold' }}>
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3 className="modal-title"><IconUsers size={18} /> Ficha de Nuevo Cliente</h3>
+            <form onSubmit={manejarGuardarCliente} className="modal-form">
+
+              <label className="form-field">
                 ID de Cliente (Número único):
-                <input type="number" required placeholder="Ej: 111" value={nuevoClienteId} onChange={e => setNuevoClienteId(e.target.value)} style={{ padding: '8px', marginTop: '5px', borderRadius: '4px', border: '1px solid #ccc' }} />
+                <input type="number" required placeholder="Ej: 111" value={nuevoClienteId} onChange={e => setNuevoClienteId(e.target.value)} />
               </label>
 
-              <label style={{ display: 'flex', flexDirection: 'column', fontSize: '13px', fontWeight: 'bold' }}>
+              <label className="form-field">
                 Nombre y Apellido completo:
-                <input type="text" required placeholder="Ej: Tomas..." value={nuevoClienteNombre} onChange={e => setNuevoClienteNombre(e.target.value)} style={{ padding: '8px', marginTop: '5px', borderRadius: '4px', border: '1px solid #ccc' }} />
+                <input type="text" required placeholder="Ej: Nombre Apellido..." value={nuevoClienteNombre} onChange={e => setNuevoClienteNombre(e.target.value)} />
               </label>
 
-              <label style={{ display: 'flex', flexDirection: 'column', fontSize: '13px', fontWeight: 'bold' }}>
+              <label className="form-field">
                 Documento Nacional de Identidad (DNI):
-                <input type="text" required placeholder="Solo números" value={nuevoClienteDni} onChange={e => setNuevoClienteDni(e.target.value)} style={{ padding: '8px', marginTop: '5px', borderRadius: '4px', border: '1px solid #ccc' }} />
+                <input type="text" required placeholder="Solo números" value={nuevoClienteDni} onChange={e => setNuevoClienteDni(e.target.value)} />
               </label>
 
-              <label style={{ display: 'flex', flexDirection: 'column', fontSize: '13px', fontWeight: 'bold' }}>
+              <label className="form-field">
                 Asociar Cobertura Médica (Obra Social):
-                <select value={nuevoClienteOS} onChange={e => setNuevoClienteOS(e.target.value)} style={{ padding: '8px', marginTop: '5px', borderRadius: '4px', border: '1px solid #ccc', backgroundColor: '#fff' }}>
+                <select value={nuevoClienteOS} onChange={e => setNuevoClienteOS(e.target.value)}>
                   <option value="">-- Sin Cobertura (Particular) --</option>
                   {obrasSociales.map(os => (
                     <option key={os.obra_social_id} value={os.obra_social_id}>{os.nombre_obra_social}</option>
@@ -215,14 +240,14 @@ const Ventas_facturacion = () => {
                 </select>
               </label>
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', fontWeight: 'bold', cursor: 'pointer', marginTop: '5px' }}>
-                <input type="checkbox" checked={nuevoClienteFrecuente} onChange={e => setNuevoClienteFrecuente(e.target.checked)} style={{ width: '16px', height: '16px' }} />
+              <label className="form-checkbox">
+                <input type="checkbox" checked={nuevoClienteFrecuente} onChange={e => setNuevoClienteFrecuente(e.target.checked)} />
                 Marcar como Cliente Frecuente
               </label>
 
-              <div style={{ display: 'flex', justifyContent: 'end', gap: '10px', marginTop: '15px' }}>
-                <button type="button" onClick={() => setShowClienteModal(false)} style={{ padding: '8px 15px', background: '#95a5a6', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Cancelar</button>
-                <button type="submit" style={{ padding: '8px 15px', background: '#2ecc71', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>Alta de Cliente</button>
+              <div className="modal-actions">
+                <button type="button" className="btn btn-secondary" onClick={() => setShowClienteModal(false)}>Cancelar</button>
+                <button type="submit" className="btn btn-primary">Alta de Cliente</button>
               </div>
 
             </form>
@@ -230,65 +255,67 @@ const Ventas_facturacion = () => {
         </div>
       )}
 
-      {/* MODAL 2: EMITIR VENTA */}
+      {/*  MODAL 2: EMITIR VENTA  */}
       {showVentaModal && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000 }}>
-          <div style={{ backgroundColor: 'white', padding: '25px', borderRadius: '8px', width: '650px', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 4px 15px rgba(0,0,0,0.2)' }}>
-            <h3 style={{ marginTop: 0, color: '#2c3e50', borderBottom: '2px solid #34495e', paddingBottom: '10px' }}>🧾 Emitir Comprobante de Venta</h3>
-            <form onSubmit={manejarConfirmarVenta} style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '15px' }}>
-              <div style={{ display: 'flex', gap: '15px' }}>
-                <label style={{ flex: 1, display: 'flex', flexDirection: 'column', fontSize: '13px', fontWeight: 'bold' }}>Número de Factura Único:<input type="number" required placeholder="Ej: 511" value={nuevaFacturaId} onChange={e => setNuevaFacturaId(e.target.value)} style={{ padding: '8px', marginTop: '5px', borderRadius: '4px', border: '1px solid #ccc' }} /></label>
-                <label style={{ flex: 1, display: 'flex', flexDirection: 'column', fontSize: '13px', fontWeight: 'bold' }}>Método de Pago:
-                  <select value={metodoPago} onChange={e => setMetodoPago(e.target.value)} style={{ padding: '8px', marginTop: '5px', borderRadius: '4px', border: '1px solid #ccc', backgroundColor: '#fff' }}>
+        <div className="modal-overlay">
+          <div className="modal-box modal-lg">
+            <h3 className="modal-title"><IconReceipt size={18} /> Emitir Comprobante de Venta</h3>
+            <form onSubmit={manejarConfirmarVenta} className="modal-form">
+              <div className="form-field-row">
+                <label className="form-field">Número de Factura Único:
+                  <input type="number" required placeholder="Ej: 511" value={nuevaFacturaId} onChange={e => setNuevaFacturaId(e.target.value)} />
+                </label>
+                <label className="form-field">Método de Pago:
+                  <select value={metodoPago} onChange={e => setMetodoPago(e.target.value)}>
                     <option value="Efectivo">Efectivo</option><option value="Tarjeta Débito">Tarjeta Débito</option><option value="Tarjeta Crédito">Tarjeta Crédito</option><option value="Mercado Pago">Mercado Pago</option><option value="Transferencia">Transferencia</option>
                   </select>
                 </label>
               </div>
 
-              <label style={{ display: 'flex', flexDirection: 'column', fontSize: '13px', fontWeight: 'bold' }}>Asociar Paciente (Catálogo):
-                <select value={clienteSeleccionado} onChange={e => setClienteSeleccionado(e.target.value)} style={{ padding: '8px', marginTop: '5px', borderRadius: '4px', border: '1px solid #ccc', backgroundColor: '#fff' }}>
+              <label className="form-field">Asociar Paciente (Catálogo):
+                <select value={clienteSeleccionado} onChange={e => setClienteSeleccionado(e.target.value)}>
                   <option value="">-- Consumidor Final (Particular) --</option>
                   {clientes.map(c => ( <option key={c.cliente_id} value={c.cliente_id}>{c.nombre} [DNI: {c.dni}] - Cobertura: {c.obra_social}</option> ))}
                 </select>
               </label>
 
-              <div style={{ border: '1px solid #ddd', padding: '15px', borderRadius: '6px', backgroundColor: '#f9f9f9' }}>
-                <h4 style={{ margin: '0 0 10px 0', color: '#34495e' }}>🛒 Cargar Medicamento</h4>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                  <select value={medSeleccionadoId} onChange={e => setMedSeleccionadoId(e.target.value)} style={{ padding: '8px', borderRadius: '4px', border: '1px solid #ccc', backgroundColor: '#fff' }}>
+              <div className="carga-medicamento">
+                <h4>Cargar Medicamento</h4>
+                <div className="carga-medicamento-body">
+                  <select className="carga-select-med" value={medSeleccionadoId} onChange={e => setMedSeleccionadoId(e.target.value)}>
                     <option value="">-- Seleccionar fármaco --</option>
                     {medicamentos.map(m => ( <option key={m.medicamento_id} value={m.medicamento_id} disabled={m.stock_actual <= 0}>{m.nombre_comercial} (${m.precio_venta}) - Disp: {m.stock_actual} u.</option> ))}
                   </select>
-                  <div style={{ display: 'flex', gap: '10px' }}>
-                    <input type="number" min="1" value={cantidadInput} onChange={e => setCantidadInput(e.target.value)} style={{ padding: '8px', width: '70px', borderRadius: '4px', border: '1px solid #ccc' }} />
-                    <input type="number" placeholder="ID Receta (Opcional)" value={recetaInput} onChange={e => setRecetaInput(e.target.value)} style={{ padding: '8px', flex: 1, borderRadius: '4px', border: '1px solid #ccc' }} />
-                    <button type="button" onClick={agregarAlCarrito} style={{ padding: '8px 15px', background: '#34495e', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>+ Añadir</button>
+                  <div className="carga-medicamento-fila">
+                    <input type="number" min="1" className="carga-cantidad" value={cantidadInput} onChange={e => setCantidadInput(e.target.value)} />
+                    <input type="number" placeholder="ID Receta (Opcional)" className="carga-receta" value={recetaInput} onChange={e => setRecetaInput(e.target.value)} />
+                    <button type="button" className="btn btn-primary" onClick={agregarAlCarrito}>+ Añadir</button>
                   </div>
                 </div>
               </div>
 
-              <div style={{ border: '1px solid #eee', borderRadius: '4px', minHeight: '60px', padding: '5px' }}>
-                {carrito.length === 0 ? <p style={{ textAlign: 'center', color: '#95a5a6', fontSize: '13px' }}>Mostrador vacío.</p> : (
-                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
-                    <thead><tr style={{ borderBottom: '2px solid #ddd', textAlign: 'left' }}><th>Item</th><th>Cant</th><th>Unitario</th><th>Total</th></tr></thead>
+              <div className="carrito-box">
+                {carrito.length === 0 ? <p className="carrito-vacio">Mostrador vacío.</p> : (
+                  <table className="carrito-tabla">
+                    <thead><tr><th>Item</th><th>Cant</th><th>Unitario</th><th>Total</th></tr></thead>
                     <tbody>
                       {carrito.map((item, index) => (
-                        <tr key={index} style={{ borderBottom: '1px solid #eee' }}><td style={{ padding: '4px 0' }}>{item.nombre}</td><td>{item.cantidad}</td><td>${item.precio_unitario.toFixed(2)}</td><td>${(item.precio_unitario * item.cantidad).toFixed(2)}</td></tr>
+                        <tr key={index}><td>{item.nombre}</td><td>{item.cantidad}</td><td>${item.precio_unitario.toFixed(2)}</td><td>${(item.precio_unitario * item.cantidad).toFixed(2)}</td></tr>
                       ))}
                     </tbody>
                   </table>
                 )}
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'end', gap: '5px', borderTop: '2px solid #ddd', paddingTop: '10px' }}>
-                <span style={{ fontSize: '13px', color: '#7f8c8d' }}>Subtotal: ${calcularSubtotalCarrito().toFixed(2)}</span>
-                {obtenerClienteActivo() && obtenerClienteActivo().obra_social_id && <span style={{ fontSize: '13px', color: '#2980b9' }}>Cobertura: {obtenerClienteActivo().obra_social}</span>}
-                <span style={{ fontSize: '16px', fontWeight: 'bold', color: '#27ae60' }}>TOTAL: ${calcularTotalFinal().toFixed(2)}</span>
+              <div className="carrito-resumen">
+                <span className="resumen-subtotal">Subtotal: ${calcularSubtotalCarrito().toFixed(2)}</span>
+                {obtenerClienteActivo() && obtenerClienteActivo().obra_social_id && <span className="resumen-cobertura">Cobertura: {obtenerClienteActivo().obra_social}</span>}
+                <span className="resumen-total">TOTAL: ${calcularTotalFinal().toFixed(2)}</span>
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'end', gap: '10px' }}>
-                <button type="button" onClick={() => { setShowVentaModal(false); setCarrito([]); }} style={{ padding: '8px 15px', background: '#95a5a6', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Cerrar</button>
-                <button type="submit" style={{ padding: '8px 15px', background: '#2ecc71', color: 'white', border: 'none', borderRadius: '4px', fontWeight: 'bold', cursor: 'pointer' }}>🧾 Emitir Comprobante</button>
+              <div className="modal-actions">
+                <button type="button" className="btn btn-secondary" onClick={() => { setShowVentaModal(false); setCarrito([]); }}>Cerrar</button>
+                <button type="submit" className="btn btn-primary">Emitir Comprobante</button>
               </div>
             </form>
           </div>

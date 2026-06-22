@@ -1,12 +1,11 @@
 .main-footer {
   width: 100%;
-  background-color: #ffffff;
-  border-top: 1px solid #e2e8f0;
-  padding: 1rem 2rem; /* Bajamos un poquito el padding vertical */
-  margin-top: auto;   /* Esto sigue empujando al fondo perfectamente */
+  background-color: var(--color-surface-raised);
+  border-top: 1px solid var(--color-border);
+  padding: 1rem 2rem;
+  margin-top: auto;
   display: flex;
   justify-content: center;
-  font-family: 'Segoe UI', system-ui, sans-serif;
 }
 
 .footer-content {
@@ -27,24 +26,25 @@
 
 .footer-brand {
   font-weight: 700;
-  color: #1e293b;
+  color: var(--color-text);
   font-size: 0.9rem;
+  font-family: var(--font-display);
 }
 
 .footer-separator {
-  color: #cbd5e1;
+  color: var(--color-border);
   font-size: 0.9rem;
 }
 
 .footer-copy {
-  color: #64748b;
+  color: var(--color-text-soft);
   font-size: 0.85rem;
   margin: 0;
 }
 
 .footer-tag {
-  background-color: #f1f5f9;
-  color: #475569;
+  background-color: var(--color-bg-soft);
+  color: var(--color-text-soft);
   font-size: 0.75rem;
   font-weight: 600;
   padding: 2px 8px;
@@ -53,7 +53,7 @@
 }
 
 .footer-system {
-  color: #64748b;
+  color: var(--color-text-soft);
   font-size: 0.85rem;
   font-weight: 500;
 }
@@ -61,9 +61,10 @@
 .footer-status-dot {
   width: 7px;
   height: 7px;
-  background-color: #2ecc71;
+  background-color: var(--color-success);
   border-radius: 50%;
   display: inline-block;
+  box-shadow: 0 0 0 3px var(--color-success-soft);
 }
 
 /* Responsivo para pantallas chicas (celulares) */

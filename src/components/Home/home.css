@@ -1,11 +1,10 @@
 .home-container {
   width: 100%;
-  background-color: #f8fafc; /* Gris claro de fondo súper limpio */
+  background-color: var(--color-bg);
   padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 .home-header {
@@ -18,47 +17,48 @@
   font-size: 0.85rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #64748b;
-  margin-bottom: 0.5rem;
+  letter-spacing: 1.2px;
+  color: var(--color-text-muted);
+  margin-bottom: 0.6rem;
 }
 
 .home-header h1 {
-  font-size: 2.8rem;
-  font-weight: 800;
-  color: #1e293b; /* Azul oscuro corporativo */
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
   margin: 0 0 0.5rem 0;
 }
 
 .home-header .subtitle {
-  font-size: 1.15rem;
-  color: #475569;
+  font-size: 1.1rem;
+  color: var(--color-text-soft);
   margin: 0;
   font-weight: 400;
 }
 
 /* Sección de Bienvenida Principal */
 .hero-section {
-  background: white;
+  background: var(--color-surface-raised);
   max-width: 1000px;
   width: 100%;
   padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.03);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
   margin-bottom: 2.5rem;
-  border-left: 5px solid #0ea5e9; /* Detalle azul en el borde */
+  border-left: 4px solid var(--color-primary);
 }
 
 .hero-content h2 {
   margin: 0 0 0.8rem 0;
-  color: #0f172a;
-  font-size: 1.4rem;
-  font-weight: 700;
+  color: var(--color-text);
+  font-size: 1.35rem;
+  font-weight: 600;
 }
 
 .hero-content p {
-  color: #475569;
-  line-height: 1.6;
+  color: var(--color-text-soft);
+  line-height: 1.65;
   margin: 0;
   font-size: 1rem;
 }
@@ -77,66 +77,71 @@
 }
 
 .feature-card {
-  background: #ffffff;
-  border-radius: 10px;
+  background: var(--color-surface-raised);
+  border-radius: var(--radius-md);
   padding: 1.8rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  border: 1px solid #e2e8f0;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .feature-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
 
 .feature-icon {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.1rem;
 }
 
-/* Colores temáticos para los íconos de los módulos */
-.font-azul { color: #3498db; }
-.font-verde { color: #2ecc71; }
-.font-naranja { color: #e67e22; }
-.font-violeta { color: #9b59b6; }
+/* Tonos sobrios por módulo, sobre fondo suave correspondiente */
+.tono-petroleo { color: var(--color-primary); background-color: var(--color-primary-soft); }
+.tono-bronce   { color: var(--color-bronze); background-color: var(--color-bronze-soft); }
+.tono-vino     { color: var(--color-wine); background-color: var(--color-wine-soft); }
+.tono-pizarra  { color: var(--color-slate); background-color: var(--color-slate-soft); }
 
 .feature-card h3 {
-  color: #1e293b;
-  font-size: 1.2rem;
-  font-weight: 700;
+  color: var(--color-text);
+  font-size: 1.15rem;
+  font-weight: 600;
   margin: 0 0 0.6rem 0;
 }
 
 .feature-card p {
-  color: #64748b;
+  color: var(--color-text-soft);
   font-size: 0.92rem;
-  line-height: 1.5;
+  line-height: 1.55;
   margin: 0;
 }
 
-/* Footer de Estado de Conexión */
+/* Footer de Estado de Conexión (verificador: nube activa) */
 .home-status {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 0.88rem;
-  color: #64748b;
+  color: var(--color-text-soft);
   font-weight: 500;
 }
 
 .status-indicator {
-  width: 10px;
-  height: 10px;
-  background-color: #2ecc71; /* Punto verde de activo */
+  width: 9px;
+  height: 9px;
+  background-color: var(--color-success);
   border-radius: 50%;
   display: inline-block;
-  box-shadow: 0 0 8px #2ecc71;
-  animation: pulse 2s infinite;
+  box-shadow: 0 0 0 4px var(--color-success-soft);
+  animation: pulse 2.4s infinite;
 }
 
 @keyframes pulse {
-  0% { transform: scale(0.95); opacity: 0.5; }
-  50% { transform: scale(1.1); opacity: 1; }
-  100% { transform: scale(0.95); opacity: 0.5; }
+  0% { transform: scale(0.92); opacity: 0.6; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(0.92); opacity: 0.6; }
 }
